@@ -43,8 +43,16 @@ export const globalStyles = globalCss({
 	},
 
 	body: {
+		height: "100vh",
 		margin: 0,
+		backgroundColor: "$sand1",
 		"-webkit-font-smoothing": "antialiased",
 		"-moz-osx-font-smoothing": "grayscale",
+	},
+
+	"#root": {
+		height: "100%",
+		display: "flex",
+		flexDirection: "column",
 	},
 });

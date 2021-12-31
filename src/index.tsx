@@ -2,11 +2,16 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
+import React from "react";
 
 const container = document.getElementById("root");
 if (!container) throw new Error("Root not found");
 const root = ReactDOM.createRoot(container);
-root.render(<App />);
+root.render(
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
