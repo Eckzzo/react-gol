@@ -3,6 +3,7 @@ import { styled } from "styles/stitches";
 export const StyledPlay = styled("button", {
 	height: "5.2rem",
 	width: "5.2rem",
+	color: "$sand12",
 	backgroundColor: "$sand2",
 	border: "none",
 	borderRadius: "100px",

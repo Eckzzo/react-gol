@@ -1,29 +1,65 @@
-import { Stage, Layer } from "react-konva";
+import produce from "immer";
+import { useRef, useEffect } from "react";
+import { Layer, Rect, Stage } from "react-konva";
+import { useRecoilState, useRecoilValue } from "recoil";
+
+import { useDebounce } from "hooks/useDebounce";
+import { generateBoard } from "utils/generateBoard";
+import { CELL_SIZE, CELL_GAP } from "utils/gameSettings";
+import { boardState, boardSizeState, themeState } from "state/atoms";
+
 import { StyledBoard } from "./Board.styles";
 
-import { useBoard } from "hooks/useBoard";
-import { Cell } from "components/atoms/Cell/Cell.component";
+const SPACING = CELL_SIZE + CELL_GAP;
 
-interface BoardProps {
-	children?: React.ReactNode;
-}
+export function Board() {
+	const theme = useRecoilValue(themeState);
+	const boardRef = useRef<HTMLDivElement>(null);
+	const [board, setBoard] = useRecoilState(boardState);
+	const [boardSize, setBoardSize] = useRecoilState(boardSizeState);
 
-export function Board({ children }: BoardProps) {
-	const { boardRef, board, width, height, handleCell } = useBoard();
+	const handleBoardResize = useDebounce(() => {
+		if (boardRef.current) {
+			const boardWidth = Math.floor(boardRef.current.clientWidth);
+			const boardHeight = Math.floor(boardRef.current.clientHeight);
+			const { board, width, height } = generateBoard(boardWidth, boardHeight);
+			setBoardSize({ width, height });
+			setBoard(board);
+		}
+	}, 50);
+
+	useEffect(() => {
+		handleBoardResize();
+		window.addEventListener("resize", handleBoardResize);
+
+		return () => {
+			window.removeEventListener("resize", handleBoardResize);
+		};
+	}, [handleBoardResize]);
 
 	return (
 		<StyledBoard ref={boardRef}>
-			<Stage width={width} height={height}>
+			<Stage height={boardSize.height} width={boardSize.width}>
 				<Layer>
 					{board.map((rows, col) => {
-						return rows.map((_, row) => {
+						return rows.map((cell, row) => {
 							return (
-								<Cell
+								<Rect
+									x={row * SPACING}
+									y={col * SPACING}
+									strokeWidth={0.1}
+									width={CELL_SIZE}
+									height={CELL_SIZE}
 									key={`${col}_${row}`}
-									isActive={board[col][row] ? true : false}
-									onClick={() => handleCell(col, row)}
-									x={row * 21}
-									y={col * 21}
+									perfectDrawEnabled={false}
+									stroke={theme.theme.colors.sand12.value}
+									fill={cell ? theme.theme.colors.orange6.value : ""}
+									onClick={() => {
+										const newBoard = produce(board, (boardCopy) => {
+											boardCopy[col][row] = board[col][row] ? 0 : 1;
+										});
+										setBoard(newBoard);
+									}}
 								/>
 							);
 						});
@@ -33,22 +69,3 @@ export function Board({ children }: BoardProps) {
 		</StyledBoard>
 	);
 }
-
-// <Cell key={idx} isActive={cell} x={idx * 21} y={0} />
-
-/*
-
-{board.map((col, colIdx) => {
-						return col.map((cell, rowIdx) => {
-							return (
-								<Cell
-									key={`${colIdx}_${rowIdx}`}
-									isActive={cell}
-									x={rowIdx * 21}
-									y={colIdx * 21}
-								/>
-							);
-						});
-					})}
-
-*/

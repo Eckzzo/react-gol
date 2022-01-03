@@ -10,16 +10,17 @@ import {
 	violetDark,
 } from "@radix-ui/colors";
 
-export const { styled, createTheme, globalCss } = createStitches({
-	theme: {
-		colors: {
-			...sand,
-			...orange,
-			...pink,
-			...violet,
+export const { styled, createTheme, globalCss, theme, keyframes } =
+	createStitches({
+		theme: {
+			colors: {
+				...sand,
+				...orange,
+				...pink,
+				...violet,
+			},
 		},
-	},
-});
+	});
 
 export const darkTheme = createTheme({
 	colors: {
@@ -29,6 +30,8 @@ export const darkTheme = createTheme({
 		...violetDark,
 	},
 });
+
+export type Theme = typeof darkTheme;
 
 export const globalStyles = globalCss({
 	"*, *::before, *::after": {
@@ -52,7 +55,5 @@ export const globalStyles = globalCss({
 
 	"#root": {
 		height: "100%",
-		display: "flex",
-		flexDirection: "column",
 	},
 });

@@ -1,16 +1,17 @@
 import { forwardRef } from "react";
+import { useRecoilState } from "recoil";
 import { PlayIcon, PauseIcon } from "@radix-ui/react-icons";
 
 import { StyledPlay } from "./Play.styles";
+import { isPlayingState } from "state/atoms";
 
-interface PlayProps extends React.ComponentPropsWithRef<"button"> {
-	isPlaying?: boolean;
-}
+interface PlayProps extends React.ComponentPropsWithRef<"button"> {}
 
 export const Play = forwardRef<HTMLButtonElement, PlayProps>(
-	({ isPlaying, ...props }, ref) => {
+	({ ...props }, ref) => {
+		const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 		return (
-			<StyledPlay ref={ref} {...props}>
+			<StyledPlay onClick={() => setIsPlaying(!isPlaying)} ref={ref} {...props}>
 				{isPlaying ? <PauseIcon /> : <PlayIcon />}
 			</StyledPlay>
 		);

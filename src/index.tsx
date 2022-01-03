@@ -3,14 +3,15 @@ import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
 import React from "react";
+import { RecoilRoot } from "recoil";
 
 const container = document.getElementById("root");
 if (!container) throw new Error("Root not found");
 const root = ReactDOM.createRoot(container);
 root.render(
-	<React.StrictMode>
+	<RecoilRoot>
 		<App />
-	</React.StrictMode>
+	</RecoilRoot>
 );
 
 // If you want to start measuring performance in your app, pass a function

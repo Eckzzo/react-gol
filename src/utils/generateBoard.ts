@@ -1,8 +1,8 @@
-import { CELL_SIZE } from "./gameSettings";
+import { CELL_GAP, CELL_SIZE } from "./gameSettings";
 
 interface GeneratedBoard {
-	boardWidth: number;
-	boardHeight: number;
+	width: number;
+	height: number;
 	board: number[][];
 }
 
@@ -14,7 +14,7 @@ export function generateBoard(width: number, height: number): GeneratedBoard {
 	);
 	return {
 		board,
-		boardWidth: numOfRows * (CELL_SIZE + 1),
-		boardHeight: numOfColumns * (CELL_SIZE + 1),
+		width: numOfRows * (CELL_SIZE + CELL_GAP),
+		height: numOfColumns * (CELL_SIZE + CELL_GAP),
 	};
 }
