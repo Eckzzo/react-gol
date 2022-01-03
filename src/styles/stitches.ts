@@ -1,33 +1,22 @@
 import { createStitches } from "@stitches/react";
-import {
-	sand,
-	sandDark,
-	orange,
-	orangeDark,
-	pink,
-	pinkDark,
-	violet,
-	violetDark,
-} from "@radix-ui/colors";
+import { olive, oliveDark, blackA, lime, limeDark } from "@radix-ui/colors";
 
 export const { styled, createTheme, globalCss, theme, keyframes } =
 	createStitches({
 		theme: {
 			colors: {
-				...sand,
-				...orange,
-				...pink,
-				...violet,
+				...olive,
+				...blackA,
+				...lime,
 			},
 		},
 	});
 
 export const darkTheme = createTheme({
 	colors: {
-		...sandDark,
-		...orangeDark,
-		...pinkDark,
-		...violetDark,
+		...oliveDark,
+		...blackA,
+		...limeDark,
 	},
 });
 
@@ -43,12 +32,13 @@ export const globalStyles = globalCss({
 	html: {
 		boxSizing: "border-box",
 		fontSize: "62.5%",
+		fontFamily: "Poppins",
 	},
 
 	body: {
 		height: "100vh",
 		margin: 0,
-		backgroundColor: "$sand1",
+		backgroundColor: "$olive1",
 		"-webkit-font-smoothing": "antialiased",
 		"-moz-osx-font-smoothing": "grayscale",
 	},

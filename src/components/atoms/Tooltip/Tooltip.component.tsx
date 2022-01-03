@@ -10,7 +10,9 @@ export function Tooltip({ label, children }: TooltipProps) {
 	return (
 		<TooltipPrimitive.Root>
 			<TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
-			<StyledContent>{label}</StyledContent>
+			<StyledContent side="top" sideOffset={8}>
+				{label}
+			</StyledContent>
 		</TooltipPrimitive.Root>
 	);
 }

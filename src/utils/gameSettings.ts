@@ -1,2 +1,2 @@
 export const CELL_SIZE = 20;
-export const CELL_GAP = 1;
+export const CELL_GAP = 4;

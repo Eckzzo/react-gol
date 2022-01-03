@@ -6,5 +6,5 @@ export const StyledBoard = styled("div", {
 	display: "flex",
 	justifyContent: "center",
 	alignItems: "center",
-	backgroundColor: "$sand2",
+	backgroundColor: "$olive2",
 });

@@ -47,13 +47,12 @@ export function Board() {
 								<Rect
 									x={row * SPACING}
 									y={col * SPACING}
-									strokeWidth={0.1}
+									strokeWidth={0.25}
 									width={CELL_SIZE}
 									height={CELL_SIZE}
 									key={`${col}_${row}`}
-									perfectDrawEnabled={false}
-									stroke={theme.theme.colors.sand12.value}
-									fill={cell ? theme.theme.colors.orange6.value : ""}
+									stroke={theme.theme.colors.olive12.value}
+									fill={cell ? theme.theme.colors.lime9.value : ""}
 									onClick={() => {
 										const newBoard = produce(board, (boardCopy) => {
 											boardCopy[col][row] = board[col][row] ? 0 : 1;

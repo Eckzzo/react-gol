@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil";
 import { theme as lightTheme, darkTheme } from "styles/stitches";
-import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 import { themeState } from "state/atoms";
 import { IconButton } from "components/atoms/IconButton/IconButton.component";
@@ -17,9 +18,13 @@ export function ThemeButton() {
 		);
 	};
 	return (
-		<Tooltip label="Change Theme">
+		<Tooltip label={theme.mode === "light" ? "Dark Mode" : "Light Mode"}>
 			<IconButton onClick={handleClick}>
-				{theme.mode === "light" ? <MoonIcon /> : <SunIcon />}
+				{theme.mode === "light" ? (
+					<FontAwesomeIcon icon={faMoon} />
+				) : (
+					<FontAwesomeIcon icon={faSun} />
+				)}
 			</IconButton>
 		</Tooltip>
 	);

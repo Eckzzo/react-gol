@@ -7,14 +7,14 @@ interface GeneratedBoard {
 }
 
 export function generateBoard(width: number, height: number): GeneratedBoard {
-	const numOfRows = Math.floor(width / (CELL_SIZE + 1));
-	const numOfColumns = Math.floor(height / (CELL_SIZE + 1));
+	const numOfRows = Math.floor(width / (CELL_SIZE + CELL_GAP));
+	const numOfColumns = Math.floor(height / (CELL_SIZE + CELL_GAP));
 	const board = Array.from({ length: numOfColumns }, () =>
 		Array.from({ length: numOfRows }, () => 0)
 	);
 	return {
 		board,
-		width: numOfRows * (CELL_SIZE + CELL_GAP),
-		height: numOfColumns * (CELL_SIZE + CELL_GAP),
+		width: numOfRows * (CELL_SIZE + CELL_GAP) - CELL_GAP,
+		height: numOfColumns * (CELL_SIZE + CELL_GAP) - CELL_GAP,
 	};
 }
