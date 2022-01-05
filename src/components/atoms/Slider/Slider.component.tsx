@@ -5,9 +5,17 @@ import {
 	StyledThumb,
 } from "./Slider.styles";
 
-export function Slider() {
+interface SliderProps {
+	value?: number[];
+	max?: number;
+	min?: number;
+	step?: number;
+	onValueChange?: (value: number[]) => void;
+}
+
+export function Slider(props: SliderProps) {
 	return (
-		<StyledSlider defaultValue={[50]} max={100} step={1}>
+		<StyledSlider {...props}>
 			<StyledTrack>
 				<StyledRange />
 			</StyledTrack>

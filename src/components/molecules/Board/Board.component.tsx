@@ -1,14 +1,21 @@
 import produce from "immer";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { Layer, Rect, Stage } from "react-konva";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { useDebounce } from "hooks/useDebounce";
 import { generateBoard } from "utils/generateBoard";
 import { CELL_SIZE, CELL_GAP } from "utils/gameSettings";
-import { boardState, boardSizeState, themeState } from "state/atoms";
+import {
+	boardState,
+	boardSizeState,
+	themeState,
+	isPlayingState,
+	speedState,
+} from "state/atoms";
 
 import { StyledBoard } from "./Board.styles";
+import { nextGeneration } from "utils/nextGeneration";
 
 const SPACING = CELL_SIZE + CELL_GAP;
 
@@ -17,6 +24,21 @@ export function Board() {
 	const boardRef = useRef<HTMLDivElement>(null);
 	const [board, setBoard] = useRecoilState(boardState);
 	const [boardSize, setBoardSize] = useRecoilState(boardSizeState);
+	const isPlaying = useRecoilValue(isPlayingState);
+	const speed = useRecoilValue(speedState);
+	const playingRef = useRef(isPlaying);
+	const speedRef = useRef(speed);
+
+	const runGame = useCallback(() => {
+		if (!playingRef.current) {
+			return;
+		}
+		setBoard((board) => {
+			return nextGeneration(board);
+		});
+
+		setTimeout(runGame, 1000 / speedRef.current);
+	}, [setBoard]);
 
 	const handleBoardResize = useDebounce(() => {
 		if (boardRef.current) {
@@ -37,6 +59,18 @@ export function Board() {
 		};
 	}, [handleBoardResize]);
 
+	useEffect(() => {
+		playingRef.current = isPlaying;
+
+		if (isPlaying) {
+			runGame();
+		}
+	}, [isPlaying, runGame]);
+
+	useEffect(() => {
+		speedRef.current = speed;
+	}, [speed]);
+
 	return (
 		<StyledBoard ref={boardRef}>
 			<Stage height={boardSize.height} width={boardSize.width}>
@@ -51,8 +85,12 @@ export function Board() {
 									width={CELL_SIZE}
 									height={CELL_SIZE}
 									key={`${col}_${row}`}
-									stroke={theme.theme.colors.olive12.value}
-									fill={cell ? theme.theme.colors.lime9.value : ""}
+									stroke={theme.theme.colors.gray12.value}
+									fill={
+										cell
+											? theme.theme.colors.grass9.value
+											: theme.theme.colors.grass1.value
+									}
 									onClick={() => {
 										const newBoard = produce(board, (boardCopy) => {
 											boardCopy[col][row] = board[col][row] ? 0 : 1;

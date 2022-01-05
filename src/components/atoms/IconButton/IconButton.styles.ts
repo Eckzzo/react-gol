@@ -3,12 +3,12 @@ import { styled } from "styles/stitches";
 export const StyledIconButton = styled("button", {
 	height: "2.8rem",
 	width: "2.8rem",
-	color: "$olive12",
-	backgroundColor: "$olive1",
+	color: "$gray12",
+	backgroundColor: "transparent",
 	border: "none",
-	borderRadius: "0.4rem",
+	borderRadius: "100%",
 	"&:hover": {
-		backgroundColor: "$olive3",
+		backgroundColor: "$gray4",
 		cursor: "pointer",
 	},
 });

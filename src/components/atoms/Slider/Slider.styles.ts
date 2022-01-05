@@ -6,14 +6,14 @@ export const StyledSlider = styled(Slider.Root, {
 	alignItems: "center",
 	userSelect: "none",
 	touchAction: "none",
-	width: "400px",
+	width: "100%",
 	'&[data-orientation="horizontal"]': {
 		height: "2rem",
 	},
 });
 
 export const StyledTrack = styled(Slider.Track, {
-	backgroundColor: "$olive12",
+	backgroundColor: "$gray12",
 	position: "relative",
 	flexGrow: 1,
 	borderRadius: "9999px",
@@ -23,7 +23,7 @@ export const StyledTrack = styled(Slider.Track, {
 
 export const StyledRange = styled(Slider.Range, {
 	position: "absolute",
-	backgroundColor: "$lime10",
+	backgroundColor: "$grass10",
 	borderRadius: "9999px",
 	height: "100%",
 });
@@ -33,12 +33,12 @@ export const StyledThumb = styled(Slider.Thumb, {
 	display: "block",
 	width: "2rem",
 	height: "2rem",
-	backgroundColor: "$olive3",
-	border: "1px solid $lime9",
+	backgroundColor: "$gray3",
+	border: "1px solid $grass9",
 	borderRadius: "9999px",
-	boxShadow: "0 2px 10px $oliveA4",
+	boxShadow: "0 2px 10px $grayA4",
 	"&:hover": {
-		backgroundColor: "$olive6",
+		backgroundColor: "$gray6",
 		cursor: "pointer",
 	},
 });

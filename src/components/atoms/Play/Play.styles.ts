@@ -1,14 +1,15 @@
 import { styled } from "styles/stitches";
 
 export const StyledPlay = styled("button", {
-	height: "5.2rem",
-	width: "5.2rem",
-	color: "$olive1",
-	backgroundColor: "$lime9",
-	border: "none",
+	height: "4.8rem",
+	width: "4.8rem",
+	color: "$grass11",
+	backgroundColor: "$grass1",
+	fontSize: "1.6rem",
+	border: "1px solid $grass7",
 	borderRadius: "100px",
 	"&:hover": {
-		backgroundColor: "$lime10",
+		border: "1px solid $grass8",
 		cursor: "pointer",
 	},
 });

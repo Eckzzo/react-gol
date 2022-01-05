@@ -8,8 +8,9 @@ const slideDownAndFade = keyframes({
 
 export const StyledContent = styled(Content, {
 	padding: "1.2rem",
-	backgroundColor: "$olive3",
-	border: "1px solid $lime6",
+	height: "100%",
+	backgroundColor: "$gray3",
+	border: "1px solid $gray6",
 	borderRadius: "0.4rem",
 	boxShadow:
 		"hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
@@ -22,16 +23,17 @@ export const StyledContent = styled(Content, {
 		},
 	},
 	"&:focus": {
-		boxShadow: `hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px, 0 0 0 2px $lime7`,
+		boxShadow: `hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px, 0 0 0 2px $grass7`,
 	},
 });
 
 export const StyledArrow = styled(Arrow, {
-	fill: "$olive4",
+	fill: "$gray4",
 });
 
 export const StyledClose = styled(Close, {
 	all: "unset",
+	position: "absolute",
 	top: 4,
 	right: 4,
 	height: "2.4rem",
@@ -39,12 +41,12 @@ export const StyledClose = styled(Close, {
 	display: "inline-flex",
 	alignItems: "center",
 	justifyContent: "center",
-	color: "$lime11",
+	color: "$grass11",
 	fontFamily: "unset",
 	borderRadius: "100%",
 
 	"&:hover": {
-		backgroundColor: "$olive6",
+		backgroundColor: "$gray6",
 		cursor: "pointer",
 	},
 });

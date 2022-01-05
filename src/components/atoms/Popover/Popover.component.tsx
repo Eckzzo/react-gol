@@ -1,8 +1,6 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
 
-import { StyledContent, StyledArrow, StyledClose } from "./Popover.styles";
+import { StyledContent, StyledArrow } from "./Popover.styles";
 
 interface PopoverProps {
 	children?: React.ReactNode;
@@ -12,9 +10,7 @@ interface TriggerProps {
 	children?: React.ReactNode;
 }
 
-interface ContentProps {
-	children?: React.ReactNode;
-}
+interface ContentProps extends React.ComponentPropsWithoutRef<"div"> {}
 
 export function Popover({ children }: PopoverProps) {
 	return <PopoverPrimitive.Root>{children}</PopoverPrimitive.Root>;
@@ -26,12 +22,9 @@ function Trigger({ children }: TriggerProps) {
 	);
 }
 
-function Content({ children }: ContentProps) {
+function Content({ children, ...props }: ContentProps) {
 	return (
-		<StyledContent sideOffset={8} portalled={false}>
-			<StyledClose>
-				<FontAwesomeIcon icon={faClose} />
-			</StyledClose>
+		<StyledContent sideOffset={8} portalled={false} {...props}>
 			{children}
 			<StyledArrow />
 		</StyledContent>
