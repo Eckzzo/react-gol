@@ -23,7 +23,7 @@ export const StyledTrack = styled(Slider.Track, {
 
 export const StyledRange = styled(Slider.Range, {
 	position: "absolute",
-	backgroundColor: "$grass10",
+	backgroundColor: "$lime10",
 	borderRadius: "9999px",
 	height: "100%",
 });
@@ -34,7 +34,7 @@ export const StyledThumb = styled(Slider.Thumb, {
 	width: "2rem",
 	height: "2rem",
 	backgroundColor: "$gray3",
-	border: "1px solid $grass9",
+	border: "1px solid $lime9",
 	borderRadius: "9999px",
 	boxShadow: "0 2px 10px $grayA4",
 	"&:hover": {

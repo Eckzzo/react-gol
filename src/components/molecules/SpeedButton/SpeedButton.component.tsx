@@ -19,7 +19,7 @@ export function SpeedButton() {
 				<Slider
 					value={[speed]}
 					min={1}
-					max={10}
+					max={20}
 					step={1}
 					onValueChange={([value]) => setSpeed(value)}
 				/>

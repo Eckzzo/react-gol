@@ -1,29 +1,24 @@
 import produce from "immer";
 import { useRef, useEffect, useCallback } from "react";
-import { Layer, Rect, Stage } from "react-konva";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
 
 import { useDebounce } from "hooks/useDebounce";
 import { generateBoard } from "utils/generateBoard";
-import { CELL_SIZE, CELL_GAP } from "utils/gameSettings";
 import {
 	boardState,
 	boardSizeState,
-	themeState,
 	isPlayingState,
 	speedState,
 } from "state/atoms";
 
 import { StyledBoard } from "./Board.styles";
 import { nextGeneration } from "utils/nextGeneration";
-
-const SPACING = CELL_SIZE + CELL_GAP;
+import { ICell } from "components/atoms/Cell/Cell.component";
 
 export function Board() {
-	const theme = useRecoilValue(themeState);
 	const boardRef = useRef<HTMLDivElement>(null);
 	const [board, setBoard] = useRecoilState(boardState);
-	const [boardSize, setBoardSize] = useRecoilState(boardSizeState);
+	const setBoardSize = useSetRecoilState(boardSizeState);
 	const isPlaying = useRecoilValue(isPlayingState);
 	const speed = useRecoilValue(speedState);
 	const playingRef = useRef(isPlaying);
@@ -73,36 +68,25 @@ export function Board() {
 
 	return (
 		<StyledBoard ref={boardRef}>
-			<Stage height={boardSize.height} width={boardSize.width}>
-				<Layer>
-					{board.map((rows, col) => {
-						return rows.map((cell, row) => {
-							return (
-								<Rect
-									x={row * SPACING}
-									y={col * SPACING}
-									strokeWidth={0.25}
-									width={CELL_SIZE}
-									height={CELL_SIZE}
-									key={`${col}_${row}`}
-									stroke={theme.theme.colors.gray12.value}
-									fill={
-										cell
-											? theme.theme.colors.grass9.value
-											: theme.theme.colors.grass1.value
-									}
-									onClick={() => {
-										const newBoard = produce(board, (boardCopy) => {
-											boardCopy[col][row] = board[col][row] ? 0 : 1;
-										});
-										setBoard(newBoard);
-									}}
-								/>
-							);
-						});
-					})}
-				</Layer>
-			</Stage>
+			{board.map((rows, col) => {
+				return rows.map((cell, row) => {
+					return (
+						<ICell
+							key={`${col}_${row}`}
+							col={col}
+							row={row}
+							value={cell}
+							onClick={() => {
+								setBoard((board) => {
+									return produce(board, (boardCopy) => {
+										boardCopy[col][row] = board[col][row] ? 0 : 1;
+									});
+								});
+							}}
+						/>
+					);
+				});
+			})}
 		</StyledBoard>
 	);
 }

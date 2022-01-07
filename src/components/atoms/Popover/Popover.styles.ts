@@ -23,7 +23,7 @@ export const StyledContent = styled(Content, {
 		},
 	},
 	"&:focus": {
-		boxShadow: `hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px, 0 0 0 2px $grass7`,
+		boxShadow: `hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px, 0 0 0 2px $lime7`,
 	},
 });
 
@@ -41,7 +41,7 @@ export const StyledClose = styled(Close, {
 	display: "inline-flex",
 	alignItems: "center",
 	justifyContent: "center",
-	color: "$grass11",
+	color: "$lime11",
 	fontFamily: "unset",
 	borderRadius: "100%",
 

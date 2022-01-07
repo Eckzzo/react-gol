@@ -5,6 +5,6 @@ export const StyledLabel = styled(Root, {
 	fontSize: "1.2rem",
 	marginBottom: "0.4rem",
 	fontWeight: "500",
-	color: "$grass12",
+	color: "$lime12",
 	userSelect: "none",
 });

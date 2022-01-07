@@ -2,21 +2,18 @@ import { IconButton } from "components/atoms/IconButton/IconButton.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "components/atoms/Tooltip/Tooltip.component";
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
-import { boardSizeState, boardState, isPlayingState } from "state/atoms";
-import { generateBoard } from "utils/generateBoard";
+import { useSetRecoilState } from "recoil";
+import { boardState } from "state/atoms";
 
 export function ResetButton() {
 	const setBoard = useSetRecoilState(boardState);
-	const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
-	const { width, height } = useRecoilValue(boardSizeState);
 
 	const handleClick = () => {
-		if (isPlaying) {
-			setIsPlaying(false);
-		}
-		const generated = generateBoard(width, height);
-		setBoard(generated.board);
+		setBoard((board) => {
+			return Array.from({ length: board.length }, () =>
+				Array.from({ length: board[0].length }, () => 0)
+			);
+		});
 	};
 
 	return (
