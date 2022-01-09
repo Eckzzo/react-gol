@@ -1,5 +1,6 @@
 import { useRecoilValue } from "recoil";
-import { themeState } from "state/atoms";
+
+import { themeState } from "state";
 import { StyledContainer } from "./Container.styles";
 
 interface ContainerProps {

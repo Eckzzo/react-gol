@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "components/atoms/Tooltip/Tooltip.component";
 import { useSetRecoilState } from "recoil";
-import { boardState } from "state/atoms";
+import { boardState } from "state";
 
 export function ResetButton() {
 	const setBoard = useSetRecoilState(boardState);

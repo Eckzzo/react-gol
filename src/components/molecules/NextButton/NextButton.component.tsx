@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "components/atoms/Tooltip/Tooltip.component";
 import { useSetRecoilState, useRecoilState } from "recoil";
-import { boardState, isPlayingState } from "state/atoms";
+import { boardState, isPlayingState } from "state";
 import { nextGeneration } from "utils/nextGeneration";
 
 export function NextButton() {

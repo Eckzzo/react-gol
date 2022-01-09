@@ -6,11 +6,6 @@ interface ThemeState {
 	theme: Theme;
 }
 
-interface BoardSizeState {
-	width: number;
-	height: number;
-}
-
 export const themeState = atom<ThemeState>({
 	key: "themeState",
 	default: { mode: "light", theme },
@@ -19,11 +14,6 @@ export const themeState = atom<ThemeState>({
 export const boardState = atom<number[][]>({
 	key: "boardState",
 	default: [],
-});
-
-export const boardSizeState = atom<BoardSizeState>({
-	key: "boardSize",
-	default: { width: 100, height: 100 },
 });
 
 export const isPlayingState = atom<boolean>({

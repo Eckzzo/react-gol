@@ -14,5 +14,5 @@ export const StyledControls = styled("div", {
 export const StyledSection = styled("div", {
 	display: "flex",
 	alignItems: "center",
-	gap: "0.8rem",
+	gap: "1.2rem",
 });

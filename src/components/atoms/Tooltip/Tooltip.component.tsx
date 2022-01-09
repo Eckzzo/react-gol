@@ -1,4 +1,5 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+
 import { StyledContent } from "./Tooltip.styles";
 
 interface TooltipProps {

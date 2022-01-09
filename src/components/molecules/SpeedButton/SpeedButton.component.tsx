@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover } from "components/atoms/Popover/Popover.component";
 import { Slider } from "components/atoms/Slider/Slider.component";
 import { useRecoilState } from "recoil";
-import { speedState } from "state/atoms";
+import { speedState } from "state";
 
 export function SpeedButton() {
 	const [speed, setSpeed] = useRecoilState(speedState);

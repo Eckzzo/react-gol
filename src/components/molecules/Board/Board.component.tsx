@@ -1,47 +1,37 @@
 import produce from "immer";
-import { useRef, useEffect, useCallback } from "react";
-import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
+import { useRef, useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { useDebounce } from "hooks/useDebounce";
-import { generateBoard } from "utils/generateBoard";
-import {
-	boardState,
-	boardSizeState,
-	isPlayingState,
-	speedState,
-} from "state/atoms";
+import { useInterval } from "hooks/useInterval";
+import { nextGeneration } from "utils/nextGeneration";
+import { Row } from "components/atoms/Row/Row.component";
+import { generateNewBoard } from "utils/generateNewBoard";
+import { Cell } from "components/atoms/Cell/Cell.component";
+import { boardState, isPlayingState, speedState } from "state";
 
 import { StyledBoard } from "./Board.styles";
-import { nextGeneration } from "utils/nextGeneration";
-import { ICell } from "components/atoms/Cell/Cell.component";
 
 export function Board() {
 	const boardRef = useRef<HTMLDivElement>(null);
-	const [board, setBoard] = useRecoilState(boardState);
-	const setBoardSize = useSetRecoilState(boardSizeState);
-	const isPlaying = useRecoilValue(isPlayingState);
+
 	const speed = useRecoilValue(speedState);
-	const playingRef = useRef(isPlaying);
-	const speedRef = useRef(speed);
+	const isPlaying = useRecoilValue(isPlayingState);
+	const [board, setBoard] = useRecoilState(boardState);
 
-	const runGame = useCallback(() => {
-		if (!playingRef.current) {
-			return;
-		}
-		setBoard((board) => {
-			return nextGeneration(board);
-		});
-
-		setTimeout(runGame, 1000 / speedRef.current);
-	}, [setBoard]);
+	useInterval(
+		() => {
+			setBoard((board) => {
+				return nextGeneration(board);
+			});
+		},
+		isPlaying ? 1000 / speed : null
+	);
 
 	const handleBoardResize = useDebounce(() => {
 		if (boardRef.current) {
-			const boardWidth = Math.floor(boardRef.current.clientWidth);
-			const boardHeight = Math.floor(boardRef.current.clientHeight);
-			const { board, width, height } = generateBoard(boardWidth, boardHeight);
-			setBoardSize({ width, height });
-			setBoard(board);
+			const { clientWidth, clientHeight } = boardRef.current;
+			setBoard(generateNewBoard(clientWidth, clientHeight));
 		}
 	}, 50);
 
@@ -54,38 +44,28 @@ export function Board() {
 		};
 	}, [handleBoardResize]);
 
-	useEffect(() => {
-		playingRef.current = isPlaying;
-
-		if (isPlaying) {
-			runGame();
-		}
-	}, [isPlaying, runGame]);
-
-	useEffect(() => {
-		speedRef.current = speed;
-	}, [speed]);
-
 	return (
 		<StyledBoard ref={boardRef}>
 			{board.map((rows, col) => {
-				return rows.map((cell, row) => {
-					return (
-						<ICell
-							key={`${col}_${row}`}
-							col={col}
-							row={row}
-							value={cell}
-							onClick={() => {
-								setBoard((board) => {
-									return produce(board, (boardCopy) => {
-										boardCopy[col][row] = board[col][row] ? 0 : 1;
-									});
-								});
-							}}
-						/>
-					);
-				});
+				return (
+					<Row key={`row_${col}`}>
+						{rows.map((cell, row) => {
+							return (
+								<Cell
+									key={`${col}_${row}`}
+									value={cell}
+									onClick={() => {
+										setBoard((board) => {
+											return produce(board, (boardCopy) => {
+												boardCopy[col][row] = board[col][row] ? 0 : 1;
+											});
+										});
+									}}
+								/>
+							);
+						})}
+					</Row>
+				);
 			})}
 		</StyledBoard>
 	);

@@ -3,9 +3,9 @@ import { theme as lightTheme, darkTheme } from "styles/stitches";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
-import { themeState } from "state/atoms";
+import { themeState } from "state";
+import { Tooltip } from "components/atoms/Tooltip/Tooltip.component";
 import { IconButton } from "components/atoms/IconButton/IconButton.component";
-import { Tooltip } from "../Tooltip/Tooltip.component";
 
 export function ThemeButton() {
 	const [theme, setTheme] = useRecoilState(themeState);
