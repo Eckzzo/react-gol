@@ -7,6 +7,7 @@ export const StyledSlider = styled(Slider.Root, {
 	userSelect: "none",
 	touchAction: "none",
 	width: "100%",
+	minWidth: "8rem",
 	'&[data-orientation="horizontal"]': {
 		height: "2rem",
 	},

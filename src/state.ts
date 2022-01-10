@@ -23,7 +23,7 @@ export const isPlayingState = atom<boolean>({
 
 export const speedState = atom<number>({
 	key: "speedState",
-	default: 5,
+	default: 10,
 });
 
 export const generationState = atom<number>({

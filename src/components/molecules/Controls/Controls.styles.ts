@@ -15,4 +15,6 @@ export const StyledSection = styled("div", {
 	display: "flex",
 	alignItems: "center",
 	gap: "1.2rem",
+	fontSize: "1.4rem",
+	color: "$gray12",
 });

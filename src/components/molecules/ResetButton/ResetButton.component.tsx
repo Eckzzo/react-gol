@@ -1,6 +1,6 @@
 import { IconButton } from "components/atoms/IconButton/IconButton.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotate } from "@fortawesome/free-solid-svg-icons";
+import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "components/atoms/Tooltip/Tooltip.component";
 import { useSetRecoilState } from "recoil";
 import { boardState } from "state";
@@ -19,7 +19,7 @@ export function ResetButton() {
 	return (
 		<Tooltip label="Reset Board">
 			<IconButton onClick={handleClick}>
-				<FontAwesomeIcon icon={faRotate} />
+				<FontAwesomeIcon icon={faRotateLeft} />
 			</IconButton>
 		</Tooltip>
 	);

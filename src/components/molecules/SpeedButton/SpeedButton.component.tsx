@@ -1,10 +1,11 @@
-import { IconButton } from "components/atoms/IconButton/IconButton.component";
+import { useRecoilState } from "recoil";
 import { faForwardFast } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Popover } from "components/atoms/Popover/Popover.component";
-import { Slider } from "components/atoms/Slider/Slider.component";
-import { useRecoilState } from "recoil";
+
 import { speedState } from "state";
+import { Slider } from "components/atoms/Slider/Slider.component";
+import { Popover } from "components/atoms/Popover/Popover.component";
+import { IconButton } from "components/atoms/IconButton/IconButton.component";
 
 export function SpeedButton() {
 	const [speed, setSpeed] = useRecoilState(speedState);
